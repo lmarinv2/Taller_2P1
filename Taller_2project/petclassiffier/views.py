@@ -11,7 +11,7 @@ import numpy as np
 # Create your views here.
 
 def home(request):
-    petClassifierFiles = mlModels.objects.filter(priority=2)[0]
+    petClassifierFiles = mlModels.objects.filter(priority=1)[0]
     path_arch = petClassifierFiles.architecture.path
     path_weights = petClassifierFiles.weights.path
 
@@ -23,7 +23,7 @@ def home(request):
     
     if request.method =='POST':
         handle_uploaded_file(request.FILES['sentFile'])
-    image = tf.keras.preprocessing.image.load_img('static/test.jpg',target_size = (150,150,3))
+    image = tf.keras.preprocessing.image.load_img('static/gato1.jpg',target_size = (150,150,3))
     input_arr = tf.keras.preprocessing.image.img_to_array(image)
     input_arr = np.array([input_arr]) # Convert single image to a batch.
     pred = tf.keras.activations.sigmoid(model.predict(input_arr))[0][0]
